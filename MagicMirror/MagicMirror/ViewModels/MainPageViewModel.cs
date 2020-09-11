@@ -1,6 +1,7 @@
 ﻿using MagicMirror.Common.MVVM;
 using MagicMirror.Models;
 using MagicMirror.Views;
+using MagicMirror.Views.WiFiSetupWizard;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -10,18 +11,13 @@ namespace MagicMirror.ViewModels
     {
         public List<MainMenuItem> MainMenuItems { get; set; }
 
-        private AboutPage AboutPage;
-        private ItemsPage ItemsPage;
-
         public MainPageViewModel()
         {
             MainMenuItems = new List<MainMenuItem>()
             {
                 new MainMenuItem() { Title = "Main", Icon = "menu_inbox.png" },
                 new MainMenuItem() { Title = "Settings", Icon = "menu_stock.png" }
-            };
-            AboutPage = new AboutPage();
-            ItemsPage = new ItemsPage();
+            };            
         }
 
         private MainMenuItem _selectedMenuItem;
@@ -36,11 +32,11 @@ namespace MagicMirror.ViewModels
                     //todo по _selectedMenuItem.TargetType из IoC контейнера вытягиваем вьюху
                     if (_selectedMenuItem.Title.Equals("Main"))
                     {
-                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(AboutPage);
+                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(new ControlPanelPage());
                     }
                     else if (_selectedMenuItem.Title.Equals("Settings"))
                     {
-                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(ItemsPage);
+                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(new SearchingDevicePage());
                     }
 
                     (App.Current.MainPage as MasterDetailPage).IsPresented = false;

@@ -13,9 +13,8 @@ namespace MagicMirror.Views
         Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
         public MainPage()
         {
-            Detail = new NavigationPage(new ItemsPage());
-            InitializeComponent();
-            //MasterBehavior = MasterBehavior.Popover;
+            Detail = new NavigationPage(new ControlPanelPage());
+            InitializeComponent();            
             BindingContext = new MainPageViewModel();
         }        
     }

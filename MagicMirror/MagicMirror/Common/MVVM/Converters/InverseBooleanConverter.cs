@@ -1,0 +1,28 @@
+﻿using System;
+using Xamarin.Forms;
+
+namespace MagicMirror.Common.MVVM.Converters
+{
+    public class InverseBooleanConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (targetType != typeof(bool))
+            {
+                throw new InvalidOperationException("The target must be a nullable boolean");
+            }
+            bool b = (bool)value;
+            return !b;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotSupportedException();
+            //return !(value as bool);
+        }
+
+        #endregion
+    }
+}
