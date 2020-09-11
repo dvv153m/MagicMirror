@@ -3,6 +3,8 @@ using MagicMirror.Models;
 using MagicMirror.Services;
 using MagicMirror.ViewModels;
 using MagicMirror.ViewModels.WiFiSetupWizard;
+using MagicMirror.Views;
+using MagicMirror.Views.WiFiSetupWizard;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MagicMirror.IoC
@@ -10,6 +12,11 @@ namespace MagicMirror.IoC
     public class ViewModelLocator
     {
         private static ServiceProvider _provider;
+
+        public static ServiceProvider ServiceProvider
+        {
+            get { return _provider; }
+        }
 
         public static void Init()
         {
@@ -31,6 +38,9 @@ namespace MagicMirror.IoC
             services.AddSingleton<INavigationPage, NavigationPage>();
             services.AddSingleton<DataContext>();
             services.AddSingleton<BluetoothService>();
+
+            services.AddSingleton<ControlPanelPage>();
+            services.AddSingleton<SearchingDevicePage>();
 
             //services.AddSingleton<SearchingDeviceView>();
 

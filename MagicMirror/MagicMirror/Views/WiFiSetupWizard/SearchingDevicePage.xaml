@@ -3,14 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:MagicMirror.Common.MVVM.Converters"
              mc:Ignorable="d"
              BindingContext="{Binding SearchingDevicePageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.WiFiSetupWizard.SearchingDevicePage">
+
+    <ContentPage.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Searching device page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Button VerticalOptions="Start"
+                Text="Find MagicMirror"
+                Command="{Binding FindMagicMirrorCommand}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                Margin="10"/>
+            <ActivityIndicator VerticalOptions="Start" IsRunning="{Binding IsBusy}" />
+
+            <StackLayout Orientation="Horizontal">
+                <ListView HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding Devices}"
+                      SelectedItem="{Binding SelectedDevice}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Padding="10">
+                                        <Label Text="{Binding NativeDevice.Name}" FontSize="18" />
+                                        <Label Text="{Binding NativeDevice.Address}" FontSize="14"></Label>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Button HorizontalOptions="Center"
+                    Command="{Binding NextCommand}"
+                    IsEnabled="{Binding CanExecuteNextBtn}"
+                    Text="Next"></Button>
         </StackLayout>
     </ContentPage.Content>
+    
 </ContentPage>

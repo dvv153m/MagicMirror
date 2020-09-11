@@ -11,5 +11,10 @@ namespace MagicMirror.ViewModels
         { 
         
         }
+
+        public AsyncCommand TestCommand => new AsyncCommand(async () => 
+        {
+            int test = 5 + 5;
+        });
     }
 }
