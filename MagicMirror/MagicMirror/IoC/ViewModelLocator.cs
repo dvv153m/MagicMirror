@@ -58,15 +58,15 @@ namespace MagicMirror.IoC
 
 
         //public static SearchingDeviceView SearchingDeviceView => _provider.GetRequiredService<SearchingDeviceView>();//todo можно ли view 
-        public SearchingDevicePageViewModel SearchingDeviceViewModel => _provider.GetRequiredService<SearchingDevicePageViewModel>();
+        public SearchingDevicePageViewModel SearchingDevicePageViewModel => _provider.GetRequiredService<SearchingDevicePageViewModel>();
 
-        public DevicePageViewModel DeviceViewModel => _provider.GetRequiredService<DevicePageViewModel>();
+        public DevicePageViewModel DevicePageViewModel => _provider.GetRequiredService<DevicePageViewModel>();
 
-        public WiFiSetupNetworkPageViewModel WiFiSetupViewModel => _provider.GetRequiredService<WiFiSetupNetworkPageViewModel>();
+        public WiFiSetupNetworkPageViewModel WiFiSetupPageViewModel => _provider.GetRequiredService<WiFiSetupNetworkPageViewModel>();
 
-        public WifiSetupPasswordPageViewModel WifiSetupPasswordViewModel => _provider.GetRequiredService<WifiSetupPasswordPageViewModel>();
+        public WifiSetupPasswordPageViewModel WifiSetupPasswordPageViewModel => _provider.GetRequiredService<WifiSetupPasswordPageViewModel>();
 
-        public FinishPageViewModel FinishViewModel => _provider.GetRequiredService<FinishPageViewModel>();
+        public FinishPageViewModel FinishPageViewModel => _provider.GetRequiredService<FinishPageViewModel>();
 
         public DataContext MMContext => _provider.GetRequiredService<DataContext>();
     }

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using MagicMirror.ViewModels;
 using MagicMirror.IoC;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,10 +12,9 @@ namespace MagicMirror.Views
     {        
         public MainPage()
         {
-            var controlPanelPage = ViewModelLocator.ServiceProvider.GetRequiredService<ControlPanelPage>();
+            var controlPanelPage = ViewModelLocator.ServiceProvider.GetRequiredService<ControlPanelPage>();            
             Detail = new NavigationPage(controlPanelPage);
-            InitializeComponent();            
-            //BindingContext = new MainPageViewModel();
+            InitializeComponent();                        
         }        
     }
 }
