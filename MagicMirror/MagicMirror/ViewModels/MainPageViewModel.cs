@@ -1,12 +1,12 @@
-﻿using MagicMirror.Common.MVVM;
+﻿using Xamarin.Forms;
 using MagicMirror.IoC;
 using MagicMirror.Models;
-using MagicMirror.ViewModels.WiFiSetupWizard;
 using MagicMirror.Views;
+using MagicMirror.Common.MVVM;
+using System.Collections.Generic;
 using MagicMirror.Views.WiFiSetupWizard;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
-using Xamarin.Forms;
+
 
 namespace MagicMirror.ViewModels
 {
@@ -18,8 +18,8 @@ namespace MagicMirror.ViewModels
         {            
             MainMenuItems = new List<MainMenuItem>()
             {
-                new MainMenuItem() { Title = "Main", Icon = "menu_inbox.png" },
-                new MainMenuItem() { Title = "Settings", Icon = "menu_stock.png" }
+                new MainMenuItem() { Title = "Main", Icon = "menu_inbox.png", TargetType = typeof(ControlPanelPage) },
+                new MainMenuItem() { Title = "Settings", Icon = "menu_stock.png", TargetType = typeof(SearchingDevicePage) }
             };            
         }
 
@@ -31,19 +31,9 @@ namespace MagicMirror.ViewModels
             {
                 _selectedMenuItem = value;
                 if (_selectedMenuItem != null)
-                {
-                    //todo по _selectedMenuItem.TargetType из IoC контейнера вытягиваем вьюху                    
-                    if (_selectedMenuItem.Title.Equals("Main"))
-                    {
-                        var controlPanelPage = ViewModelLocator.ServiceProvider.GetRequiredService<ControlPanelPage>();
-                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(controlPanelPage);
-                    }
-                    else if (_selectedMenuItem.Title.Equals("Settings"))
-                    {
-                        var searchingDevicePage = ViewModelLocator.ServiceProvider.GetRequiredService<SearchingDevicePage>();
-                        (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(searchingDevicePage);
-                    }
-
+                {                        
+                    var page = (Page)ViewModelLocator.ServiceProvider.GetRequiredService(_selectedMenuItem.TargetType);
+                    (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(page);                    
                     (App.Current.MainPage as MasterDetailPage).IsPresented = false;
                 }
             }
