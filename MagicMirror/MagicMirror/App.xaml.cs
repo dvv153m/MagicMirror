@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MagicMirror.Services;
 using MagicMirror.Views;
+using MagicMirror.IoC;
 
 namespace MagicMirror
 {
@@ -12,8 +13,8 @@ namespace MagicMirror
         public App()
         {
             InitializeComponent();
-
             //DependencyService.Register<MockDataStore>();
+            ViewModelLocator.Init();
             MainPage = new MainPage();
         }
 

@@ -9,13 +9,12 @@ namespace MagicMirror.Views
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : MasterDetailPage
-    {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+    {        
         public MainPage()
         {
             Detail = new NavigationPage(new ControlPanelPage());
             InitializeComponent();            
-            BindingContext = new MainPageViewModel();
+            //BindingContext = new MainPageViewModel();
         }        
     }
 }

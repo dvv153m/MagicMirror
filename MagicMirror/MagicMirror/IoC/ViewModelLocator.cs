@@ -13,13 +13,14 @@ namespace MagicMirror.IoC
 
         public static void Init()
         {
-            var services = new ServiceCollection();
-            services.AddTransient<MainPageViewModel>();            
+            var services = new ServiceCollection();            
+            services.AddTransient<MainPageViewModel>();
+            services.AddTransient<ControlPanelPageViewModel>();
             services.AddTransient<SearchingDevicePageViewModel>();
             services.AddTransient<DevicePageViewModel>();
             services.AddTransient<WiFiSetupNetworkPageViewModel>();
             services.AddTransient<WifiSetupPasswordPageViewModel>();
-            services.AddTransient<FinishPageViewModel>();
+            services.AddTransient<FinishPageViewModel>();            
 
             /*GetType().Assembly.GetTypes()
                  .Where(type => type.IsClass)
@@ -43,7 +44,9 @@ namespace MagicMirror.IoC
 
         public MainPageViewModel MainPageViewModel => _provider.GetRequiredService<MainPageViewModel>();
 
-        
+        public ControlPanelPageViewModel ControlPanelPageViewModel => _provider.GetRequiredService<ControlPanelPageViewModel>();        
+
+
         //public static SearchingDeviceView SearchingDeviceView => _provider.GetRequiredService<SearchingDeviceView>();//todo можно ли view 
         public SearchingDevicePageViewModel SearchingDeviceViewModel => _provider.GetRequiredService<SearchingDevicePageViewModel>();
 

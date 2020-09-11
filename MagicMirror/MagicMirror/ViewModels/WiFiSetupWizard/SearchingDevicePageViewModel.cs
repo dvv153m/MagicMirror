@@ -7,5 +7,9 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class SearchingDevicePageViewModel : ViewModelBase
     {
+        public SearchingDevicePageViewModel()
+        { 
+        
+        }
     }
 }
