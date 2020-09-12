@@ -12,8 +12,7 @@ namespace MagicMirror
 
         public App()
         {
-            InitializeComponent();
-            //DependencyService.Register<MockDataStore>();
+            InitializeComponent();            
             ViewModelLocator.Init();
             MainPage = new MainPage();
         }

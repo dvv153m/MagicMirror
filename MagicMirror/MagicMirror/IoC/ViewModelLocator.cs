@@ -11,11 +11,11 @@ namespace MagicMirror.IoC
 {
     public class ViewModelLocator
     {
-        private static ServiceProvider _provider;
+        private static ServiceProvider _serviceProvider;
 
         public static ServiceProvider ServiceProvider
         {
-            get { return _provider; }
+            get { return _serviceProvider; }
         }
 
         public static void Init()
@@ -41,10 +41,9 @@ namespace MagicMirror.IoC
 
             services.AddSingleton<ControlPanelPage>();
             services.AddSingleton<SearchingDevicePage>();
+            
 
-            //services.AddSingleton<SearchingDeviceView>();
-
-            _provider = services.BuildServiceProvider();
+            _serviceProvider = services.BuildServiceProvider();
 
             /*foreach (var item in services)
             {
@@ -52,22 +51,20 @@ namespace MagicMirror.IoC
             }*/
         }
 
-        public MainPageViewModel MainPageViewModel => _provider.GetRequiredService<MainPageViewModel>();
+        public MainPageViewModel MainPageViewModel => _serviceProvider.GetRequiredService<MainPageViewModel>();
 
-        public ControlPanelPageViewModel ControlPanelPageViewModel => _provider.GetRequiredService<ControlPanelPageViewModel>();        
+        public ControlPanelPageViewModel ControlPanelPageViewModel => _serviceProvider.GetRequiredService<ControlPanelPageViewModel>();        
+        
+        public SearchingDevicePageViewModel SearchingDevicePageViewModel => _serviceProvider.GetRequiredService<SearchingDevicePageViewModel>();
 
+        public DevicePageViewModel DevicePageViewModel => _serviceProvider.GetRequiredService<DevicePageViewModel>();
 
-        //public static SearchingDeviceView SearchingDeviceView => _provider.GetRequiredService<SearchingDeviceView>();//todo можно ли view 
-        public SearchingDevicePageViewModel SearchingDevicePageViewModel => _provider.GetRequiredService<SearchingDevicePageViewModel>();
+        public WiFiSetupNetworkPageViewModel WiFiSetupNetworkPageViewModel => _serviceProvider.GetRequiredService<WiFiSetupNetworkPageViewModel>();
 
-        public DevicePageViewModel DevicePageViewModel => _provider.GetRequiredService<DevicePageViewModel>();
+        public WifiSetupPasswordPageViewModel WifiSetupPasswordPageViewModel => _serviceProvider.GetRequiredService<WifiSetupPasswordPageViewModel>();
 
-        public WiFiSetupNetworkPageViewModel WiFiSetupPageViewModel => _provider.GetRequiredService<WiFiSetupNetworkPageViewModel>();
+        public FinishPageViewModel FinishPageViewModel => _serviceProvider.GetRequiredService<FinishPageViewModel>();
 
-        public WifiSetupPasswordPageViewModel WifiSetupPasswordPageViewModel => _provider.GetRequiredService<WifiSetupPasswordPageViewModel>();
-
-        public FinishPageViewModel FinishPageViewModel => _provider.GetRequiredService<FinishPageViewModel>();
-
-        public DataContext MMContext => _provider.GetRequiredService<DataContext>();
+        public DataContext MMContext => _serviceProvider.GetRequiredService<DataContext>();
     }
 }

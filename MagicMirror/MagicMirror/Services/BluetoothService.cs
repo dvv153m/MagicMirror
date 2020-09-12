@@ -86,6 +86,11 @@ namespace MagicMirror.Services
             return await Task.FromResult(false);
         }
 
+        public async Task DisconnectAsync(IDevice device)
+        {
+            await _adapter.DisconnectDeviceAsync(device);
+        }
+
         //todo вынести в отдельный класс который проверяет permissions и состояние блутуса и gps
         public BluetoothState GetBluetoothState()
         {

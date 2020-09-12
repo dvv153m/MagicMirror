@@ -3,13 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior"
              mc:Ignorable="d"
+             BindingContext="{Binding WiFiSetupNetworkPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.WiFiSetupWizard.WiFiSetupNetworkPage">
+
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding OnLoadedCommand}"/>
+    </ContentPage.Behaviors>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Margin="10"
+                     Orientation="Vertical">
+            <Label HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Text="Get wifi networks..."
+                   IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator VerticalOptions="Start"
+                               IsRunning="{Binding IsBusy}"/>
+
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <Label HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   Text="Choose wifi networks:"
+                   IsVisible="{Binding HasNetworks}"/>
+                <ListView HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding Networks}"
+                      SelectedItem="{Binding SelectedNetwork}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout>
+                                        <Label Margin="10,0,0,0" Text="{Binding }" FontSize="18" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Button HorizontalOptions="Center"
+                    Command="{Binding NextCommand}"
+                    IsEnabled="{Binding CanExecuteNextBtn}"
+                    Text="Next"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
