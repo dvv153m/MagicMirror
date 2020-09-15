@@ -12,7 +12,12 @@
             <Label Text="ControlPanelPage"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            
+
+            <Button 
+                Text="Test"
+                Command="{Binding TestCommand}"                
+                Margin="10"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

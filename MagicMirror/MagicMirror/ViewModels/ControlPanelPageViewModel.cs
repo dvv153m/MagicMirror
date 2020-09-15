@@ -5,6 +5,7 @@ using MagicMirror.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace MagicMirror.ViewModels
@@ -19,6 +20,12 @@ namespace MagicMirror.ViewModels
             //Preferences.Set("my_key", "my_value");
             //var myValue = Preferences.Get("my_key", "default_value");
         }
+
+        public AsyncCommand TestCommand => new AsyncCommand(async() =>
+        {
+            await Task.Delay(1000);
+            int f = 5 + 5;
+        });
 
     }
 }

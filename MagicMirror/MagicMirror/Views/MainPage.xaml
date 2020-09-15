@@ -44,5 +44,9 @@
             </Grid>
         </ContentPage>
     </MasterDetailPage.Master>
-    
+
+    <!--<MasterDetailPage.Detail>
+        <views:ControlPanelPage/>
+    </MasterDetailPage.Detail>-->
+
 </MasterDetailPage>
