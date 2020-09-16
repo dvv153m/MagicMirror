@@ -36,8 +36,8 @@ namespace MagicMirror.ViewModels
                     (App.Current.MainPage as MasterDetailPage).Detail = new NavigationPage(page);                    
                     (App.Current.MainPage as MasterDetailPage).IsPresented = false;
                 }
-                //_selectedMenuItem = null;
-                //OnPropertyChanged();
+                _selectedMenuItem = null;
+                OnPropertyChanged();
             }
         }
     }
