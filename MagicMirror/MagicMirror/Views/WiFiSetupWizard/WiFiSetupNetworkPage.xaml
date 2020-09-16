@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior"
              mc:Ignorable="d"
+             Title="Settings"
              BindingContext="{Binding WiFiSetupNetworkPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.WiFiSetupWizard.WiFiSetupNetworkPage">
 

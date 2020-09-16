@@ -10,6 +10,6 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
-    <application android:label="MagicMirror.Android"></application>
+    <application android:label="MagicMirror"></application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

@@ -9,11 +9,11 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class FinishPageViewModel : ViewModelBase
     {
-        private INavigationPage _navigation;
+        private INavigationService _navigation;
         private BluetoothService _bluetoothService;
         private DataContext _mMContext;        
 
-        public FinishPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationPage navigation)
+        public FinishPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation)
         {
             _mMContext = mMContext;
             _bluetoothService = bluetoothService;
@@ -32,7 +32,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand GoToMainViewCommand => new AsyncCommand(async () => {
             
             await _bluetoothService.DisconnectAsync(_mMContext.Device);
-            _navigation.NextPage(new MainPage());
+            _navigation.NextPage(typeof(ControlPanelPage));
 
         });
 

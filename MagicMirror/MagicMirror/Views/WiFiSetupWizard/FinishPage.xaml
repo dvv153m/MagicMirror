@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             BindingContext="{Binding DevicePageViewModel, Source={StaticResource ViewModelLocator}}"
+             Title="Settings"
+             BindingContext="{Binding FinishPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.WiFiSetupWizard.FinishPage">
     <ContentPage.Content>
         <StackLayout>

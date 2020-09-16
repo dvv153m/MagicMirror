@@ -10,10 +10,10 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class WifiSetupPasswordPageViewModel : ViewModelBase
     {
-        private INavigationPage _navigation;
+        private INavigationService _navigation;
         private DataContext _mMContext;
 
-        public WifiSetupPasswordPageViewModel(DataContext mMContext, INavigationPage navigation)
+        public WifiSetupPasswordPageViewModel(DataContext mMContext, INavigationService navigation)
         {
             _mMContext = mMContext;
             _navigation = navigation;
@@ -47,7 +47,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             finally
             {
                 IsBusy = false;
-                _navigation.NextPage(new FinishPage());
+                _navigation.NextPage(typeof(FinishPage));
             }
 
         }, () => CanExecuteConnect);

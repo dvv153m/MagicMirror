@@ -6,6 +6,8 @@ using MagicMirror.ViewModels.WiFiSetupWizard;
 using MagicMirror.Views;
 using MagicMirror.Views.WiFiSetupWizard;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Reflection;
 
 namespace MagicMirror.IoC
 {
@@ -19,35 +21,39 @@ namespace MagicMirror.IoC
         }
 
         public static void Init()
-        {
-            var services = new ServiceCollection();            
-            services.AddTransient<MainPageViewModel>();
-            services.AddTransient<ControlPanelPageViewModel>();
-            services.AddTransient<SearchingDevicePageViewModel>();
-            services.AddTransient<DevicePageViewModel>();
-            services.AddTransient<WiFiSetupNetworkPageViewModel>();
-            services.AddTransient<WifiSetupPasswordPageViewModel>();
-            services.AddTransient<FinishPageViewModel>();            
-
-            /*GetType().Assembly.GetTypes()
+        {            
+            var services = new ServiceCollection();
+            
+            //регистрируем viewModel
+            Assembly.GetExecutingAssembly().DefinedTypes
                  .Where(type => type.IsClass)
-                 .Where(type => type.Name.EndsWith("ViewModel"))
+                 .Where(type => type.Name.EndsWith("PageViewModel"))
                  .ToList()
-                 .ForEach(viewModel => services.AddTransient(viewModel));*/
+                 .ForEach(viewModelType => services.AddTransient(viewModelType));
 
-            services.AddSingleton<INavigationPage, NavigationPage>();
+            //регистрируем view(page) //info если регистрируем как AddSingleton то не регистрирует если как AddTransient то норм
+            Assembly.GetExecutingAssembly().DefinedTypes
+                 .Where(type => type.IsClass)
+                 .Where(type => type.Name.EndsWith("Page"))
+                 .ToList()
+                 .ForEach(viewType => services.AddTransient(viewType));
+
+            services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<DataContext>();
             services.AddSingleton<BluetoothService>();
-
-            services.AddSingleton<ControlPanelPage>();
-            services.AddSingleton<SearchingDevicePage>();
             
+            /*services.AddSingleton<ControlPanelPage>();
+            services.AddSingleton<SearchingDevicePage>();
+            services.AddSingleton<DevicePage>();
+            services.AddSingleton<FinishPage>();
+            services.AddSingleton<WiFiSetupNetworkPage>();
+            services.AddSingleton<WifiSetupPasswordPage>();*/
 
             _serviceProvider = services.BuildServiceProvider();
 
             /*foreach (var item in services)
-            {
-                _provider.GetRequiredService(item.ServiceType);
+            {                
+                _serviceProvider.GetRequiredService(item.ServiceType);
             }*/
         }
 

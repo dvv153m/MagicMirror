@@ -14,6 +14,7 @@ GetType().Assembly.GetTypes()
 5) В FinishPageViewModel в GoToMainViewCommand нужно указать MainPage или ControlPanelPage
 6) Сохранение ip (хранения инфы о нескольких устройствах). Получение mac адреса из raspberry
 
+
 ДОБАВИТЬ отписку от событий
 protected override void OnDisappearing()
     {

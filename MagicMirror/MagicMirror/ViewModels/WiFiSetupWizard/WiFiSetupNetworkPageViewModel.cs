@@ -12,11 +12,11 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class WiFiSetupNetworkPageViewModel : ViewModelBase
     {
-        private INavigationPage _navigation;
+        private INavigationService _navigation;
         private BluetoothService _bluetoothService;
         private DataContext _mMContext;
 
-        public WiFiSetupNetworkPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationPage navigation)
+        public WiFiSetupNetworkPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation)
         {
             _mMContext = mMContext;
             _bluetoothService = bluetoothService;
@@ -54,7 +54,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                         //display this error wifiResponse.ErrorInfo                                                              
                         await App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please reconnect", "OK");                        
                         await _bluetoothService.DisconnectAsync(_mMContext.Device);
-                        _navigation.NextPage(new SearchingDevicePage());
+                        _navigation.NextPage(typeof(SearchingDevicePage));
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand NextCommand => new AsyncCommand(async () => {
 
             _mMContext.SelectedNetwork = SelectedNetwork;
-            _navigation.NextPage(new WifiSetupPasswordPage());
+            _navigation.NextPage(typeof(WifiSetupPasswordPage));
 
         }, () => !IsBusy);
 
