@@ -1,6 +1,7 @@
 ﻿using MagicMirror.Common.MVVM;
 using MagicMirror.Common.Navigation;
 using MagicMirror.Models;
+using MagicMirror.Repository;
 using MagicMirror.Services;
 using MagicMirror.Views;
 
@@ -13,7 +14,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         private BluetoothService _bluetoothService;
         private DataContext _mMContext;        
 
-        public FinishPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation)
+        public FinishPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation, MagicMirrorRepository magicMirrorRepository)
         {
             _mMContext = mMContext;
             _bluetoothService = bluetoothService;
@@ -22,6 +23,8 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             if (_mMContext.Result)
             {
                 Result = "Success connection";
+                _mMContext.MagicMiror.MacAddress = "01";//todo потом удалить
+                magicMirrorRepository.AddOrUpdate(_mMContext.MagicMiror);
             }
             else
             {

@@ -1,10 +1,9 @@
 ﻿using MagicMirror.Common.Navigation;
 using MagicMirror.Models;
+using MagicMirror.Repository;
 using MagicMirror.Services;
 using MagicMirror.ViewModels;
 using MagicMirror.ViewModels.WiFiSetupWizard;
-using MagicMirror.Views;
-using MagicMirror.Views.WiFiSetupWizard;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Reflection;
@@ -41,7 +40,8 @@ namespace MagicMirror.IoC
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<DataContext>();
             services.AddSingleton<BluetoothService>();
-            
+            services.AddSingleton<MagicMirrorRepository>();
+
             _serviceProvider = services.BuildServiceProvider();
 
             /*foreach (var item in services)
@@ -51,6 +51,8 @@ namespace MagicMirror.IoC
         }
 
         public MainPageViewModel MainPageViewModel => _serviceProvider.GetRequiredService<MainPageViewModel>();
+
+        public MagicMirrorsPageViewModel MagicMirrorsPageViewModel => _serviceProvider.GetRequiredService<MagicMirrorsPageViewModel>();        
 
         public ControlPanelPageViewModel ControlPanelPageViewModel => _serviceProvider.GetRequiredService<ControlPanelPageViewModel>();        
         

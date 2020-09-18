@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MagicMirror.Models
 {
-    public class MagicMiror
+    public class MagicMirror
     {
         public string Name { get; set; }        
 
@@ -14,7 +14,7 @@ namespace MagicMirror.Models
 
         public string MacAddress { get; set; }
 
-        public MagicMiror()
+        public MagicMirror()
         {
             Name = "MagicMirror";
         }

@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace MagicMirror.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MagicMirrorsPage : ContentView
+    public partial class MagicMirrorsPage : ContentPage
     {
         public MagicMirrorsPage()
         {

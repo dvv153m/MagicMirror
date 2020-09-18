@@ -6,7 +6,7 @@ namespace MagicMirror.Models
     {
         public IDevice Device { get; set; }
 
-        public MagicMiror MagicMiror { get; set; }
+        public MagicMirror MagicMiror { get; set; }
 
         /// <summary>
         /// Результат подключения к wifi
@@ -17,7 +17,7 @@ namespace MagicMirror.Models
 
         public DataContext()
         {
-            MagicMiror = new MagicMiror();
+            MagicMiror = new MagicMirror();
         }
     }
 }
