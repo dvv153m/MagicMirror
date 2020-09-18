@@ -68,4 +68,5 @@ namespace MagicMirror.Common.MVVM
             handler?.Invoke(sender, EventArgs.Empty);
         }
     }
+
 }

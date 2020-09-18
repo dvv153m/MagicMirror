@@ -42,13 +42,6 @@ namespace MagicMirror.IoC
             services.AddSingleton<DataContext>();
             services.AddSingleton<BluetoothService>();
             
-            /*services.AddSingleton<ControlPanelPage>();
-            services.AddSingleton<SearchingDevicePage>();
-            services.AddSingleton<DevicePage>();
-            services.AddSingleton<FinishPage>();
-            services.AddSingleton<WiFiSetupNetworkPage>();
-            services.AddSingleton<WifiSetupPasswordPage>();*/
-
             _serviceProvider = services.BuildServiceProvider();
 
             /*foreach (var item in services)

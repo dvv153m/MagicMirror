@@ -3,20 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior"
              mc:Ignorable="d"
              Title="Magic Mirror"
              BindingContext="{Binding ControlPanelPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.ControlPanelPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="ControlPanelPage"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="10">
 
-            <Button 
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Back" HorizontalOptions="StartAndExpand" Clicked="OnBack_Clicked" />
+                <Button Text="Forward" HorizontalOptions="EndAndExpand" Clicked="OnForward_Clicked" />
+            </StackLayout>
+
+            <WebView x:Name="webView"
+                     WidthRequest="1000"
+                     HeightRequest="1000" 
+                     Source="{Binding Url}">
+                <!--<WebView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="Navigated"  Command="{Binding NavigatingCommand}"/>
+                </WebView.Behaviors>-->
+                <!--<behaviors:EventToCommandBehavior EventName="Naviating" Command="{Binding NavigatingCommand}"/>-->
+                <!--<behaviors:Interaction.Behaviors>
+                    <behaviors:BehaviorCollection>
+                        <behaviors:EventToCommand 
+                            EventName="Naviating"
+                    Command="{Binding navigatingCommand}"
+                PassEventArgument="True"
+                />
+                    </behaviors:BehaviorCollection>-->
+            </WebView>
+
+            <!--<Button 
                 Text="Test"
                 Command="{Binding TestCommand}"                
-                Margin="10"/>
+                Margin="10"/>-->
 
         </StackLayout>
     </ContentPage.Content>

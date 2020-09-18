@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +15,31 @@ namespace MagicMirror.Views
         public ControlPanelPage()
         {
             InitializeComponent();
+            webView.Navigated += WebView_Navigated;
+        }
+
+        private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            if (e.Result != WebNavigationResult.Success)
+            {
+                //Handle error here!
+            }
+        }
+
+        private void OnBack_Clicked(object sender, EventArgs e)
+        {            
+            /*if (webView.CanGoBack)
+            {
+                webView.GoBack();
+            }*/
+        }
+
+        private void OnForward_Clicked(object sender, EventArgs e)
+        {
+            if (webView.CanGoForward)
+            {
+                webView.GoForward();
+            }
         }
     }
 }
