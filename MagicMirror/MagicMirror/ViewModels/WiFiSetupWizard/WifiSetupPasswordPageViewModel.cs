@@ -17,7 +17,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         {
             _mMContext = mMContext;
             _navigation = navigation;
-            NetworkName = _mMContext.SelectedNetwork;
+            NetworkName = _mMContext.MagicMiror.SelectedNetwork;
         }
 
         public AsyncCommand ConnectCommand => new AsyncCommand(async () => {
@@ -27,14 +27,14 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 IsBusy = true;
                 OnPropertyChanged("CanExecuteConnect");
 
-                var wiFiCredentialsRequest = new WiFiCredentialsRequest { Ssid = _mMContext.SelectedNetwork, Password = Password };
+                var wiFiCredentialsRequest = new WiFiCredentialsRequest { Ssid = _mMContext.MagicMiror.SelectedNetwork, Password = Password };
                 var bluetoothClient = new BluetoothModel();
                 WiFiCredentialsResponse response = await bluetoothClient.SetWifiCredentialsAsync(_mMContext.Device, wiFiCredentialsRequest);
 
                 if (response.IsSuccess)
                 {
                     _mMContext.Result = true;
-                    _mMContext.Ip = response.Ip;
+                    _mMContext.MagicMiror.Ip = response.Ip;
                 }
                 else
                 {

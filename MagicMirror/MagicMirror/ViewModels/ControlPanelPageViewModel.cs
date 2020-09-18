@@ -19,10 +19,23 @@ namespace MagicMirror.ViewModels
 
         public ControlPanelPageViewModel()
         {
-            //Preferences.Set("my_key", "my_value");
+            //Preferences.Set("12345", "my_value");
             //var myValue = Preferences.Get("my_key", "default_value");
         }
 
+        public AsyncCommand TestCommand => new AsyncCommand(async () =>
+        {
+            var myValue = Preferences.Get("12345", "");
+            if (string.IsNullOrEmpty(myValue))
+            {
+                Preferences.Set("12345", "my_value12");//
+            }
+            else
+            {
+                Preferences.Set("12345", "3434");
+            }
+
+        });
 
         /*public AsyncCommand NavigatingCommand => new AsyncCommand(async () =>
         {

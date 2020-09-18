@@ -66,7 +66,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 
         public AsyncCommand NextCommand => new AsyncCommand(async () => {
 
-            _mMContext.SelectedNetwork = SelectedNetwork;
+            _mMContext.MagicMiror.SelectedNetwork = SelectedNetwork;
             _navigation.NextPage(typeof(WifiSetupPasswordPage));
 
         }, () => !IsBusy);

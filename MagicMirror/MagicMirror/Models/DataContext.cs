@@ -6,9 +6,7 @@ namespace MagicMirror.Models
     {
         public IDevice Device { get; set; }
 
-        public string SelectedNetwork { get; set; }
-
-        public string Ip { get; set; }
+        public MagicMiror MagicMiror { get; set; }
 
         /// <summary>
         /// Результат подключения к wifi
@@ -16,5 +14,10 @@ namespace MagicMirror.Models
         public bool Result { get; set; }
 
         public string ErrorInfo { get; set; }
+
+        public DataContext()
+        {
+            MagicMiror = new MagicMiror();
+        }
     }
 }
