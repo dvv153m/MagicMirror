@@ -12,8 +12,10 @@ namespace MagicMirror.Views
     {        
         public MainPage()
         {
-            var controlPanelPage = ViewModelLocator.ServiceProvider.GetRequiredService<ControlPanelPage>();            
-            Detail = new NavigationPage(controlPanelPage);
+            var page = ViewModelLocator.ServiceProvider.GetRequiredService<MagicMirrorsPage>();            
+            Detail = new NavigationPage(page);
+            //var controlPanelPage = ViewModelLocator.ServiceProvider.GetRequiredService<ControlPanelPage>();            
+            //Detail = new NavigationPage(controlPanelPage);
             InitializeComponent();                        
         }        
     }

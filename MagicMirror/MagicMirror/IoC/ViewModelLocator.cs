@@ -30,6 +30,11 @@ namespace MagicMirror.IoC
                  .ToList()
                  .ForEach(viewModelType => services.AddTransient(viewModelType));
 
+            /*var dd = Assembly.GetExecutingAssembly().DefinedTypes
+                 .Where(type => type.IsClass)
+                 .Where(type => type.Name.EndsWith("Page"))
+                 .ToList();*/
+
             //регистрируем view(page) //info если регистрируем как AddSingleton то не регистрирует если как AddTransient то норм
             Assembly.GetExecutingAssembly().DefinedTypes
                  .Where(type => type.IsClass)
@@ -44,10 +49,10 @@ namespace MagicMirror.IoC
 
             _serviceProvider = services.BuildServiceProvider();
 
-            /*foreach (var item in services)
+            foreach (var item in services)
             {                
                 _serviceProvider.GetRequiredService(item.ServiceType);
-            }*/
+            }
         }
 
         public MainPageViewModel MainPageViewModel => _serviceProvider.GetRequiredService<MainPageViewModel>();

@@ -14,10 +14,24 @@
     </ContentPage.Behaviors>
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Mirrors:"></Label>
+            <ListView HorizontalOptions="FillAndExpand"
+                      ItemsSource="{Binding Mirrors}"
+                      SelectedItem="{Binding SelectedMirror}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding Name}" FontSize="18" />
+                                    <Label Text="{Binding Ip}" FontSize="14"></Label>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
