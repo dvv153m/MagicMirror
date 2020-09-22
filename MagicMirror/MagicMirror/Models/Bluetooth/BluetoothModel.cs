@@ -67,7 +67,7 @@ namespace MagicMirror.Models.Bluetooth
         /// </summary>
         /// <param name="device">Устройство к которому подключились</param>
         /// <returns>Список сетей</returns>
-        public async Task<WiFiNetworkResponse> GetNetworksAsync(IDevice device)
+        public async Task<WiFiNetworksResponse> GetNetworksAsync(IDevice device)
         {
             try
             {
@@ -79,22 +79,22 @@ namespace MagicMirror.Models.Bluetooth
                         var result = await response.Characteristic.WriteAsync(new byte[] { });
                         var data = await response.Characteristic.ReadAsync();
                         var wifiResponseJson = Encoding.UTF8.GetString(data);
-                        WiFiNetworkResponse wifiResponse = JsonConvert.DeserializeObject<WiFiNetworkResponse>(wifiResponseJson);
+                        WiFiNetworksResponse wifiResponse = JsonConvert.DeserializeObject<WiFiNetworksResponse>(wifiResponseJson);
                         return wifiResponse;
                     }
                     else
                     {
-                        return new WiFiNetworkResponse() { IsSuccess = false, ErrorCode = response.ErrorCode };
+                        return new WiFiNetworksResponse() { IsSuccess = false, ErrorCode = response.ErrorCode };
                     }
                 }
                 else
                 {
-                    return new WiFiNetworkResponse() { IsSuccess = false, ErrorCode = (int)BluetoothErrorCode.NoConnection };
+                    return new WiFiNetworksResponse() { IsSuccess = false, ErrorCode = (int)BluetoothErrorCode.NoConnection };
                 }
             }
             catch (Exception ex)
             {
-                return new WiFiNetworkResponse() { IsSuccess = false, ErrorCode = (int)BluetoothErrorCode.Unknown, ErrorInfo = ex.ToString() };
+                return new WiFiNetworksResponse() { IsSuccess = false, ErrorCode = (int)BluetoothErrorCode.Unknown, ErrorInfo = ex.ToString() };
             }
         }
 

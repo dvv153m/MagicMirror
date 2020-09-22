@@ -29,7 +29,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             try
             {
                 var bluetoothClient = new BluetoothModel();
-                WiFiNetworkResponse wifiResponse = await bluetoothClient.GetNetworksAsync(_mMContext.Device);
+                WiFiNetworksResponse wifiResponse = await bluetoothClient.GetNetworksAsync(_mMContext.Device);
                 if (wifiResponse.IsSuccess)
                 {
                     HasNetworks = wifiResponse.Networks.Any();

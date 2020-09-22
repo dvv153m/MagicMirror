@@ -2,7 +2,7 @@
 
 namespace MagicMirror.Models.WiFi
 {
-    public class WiFiNetworkResponse
+    public class WiFiNetworksResponse
     {
         public string[] Networks { get; set; }
 

@@ -6,7 +6,7 @@
              xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior"
              mc:Ignorable="d"
              Title="Magic Mirror"
-             BindingContext="{Binding MagicMirrorsPageViewModel, Source={StaticResource ViewModelLocator}}"
+             
              x:Class="MagicMirror.Views.MagicMirrorsPage">
 
     <ContentPage.Behaviors>
