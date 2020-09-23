@@ -19,11 +19,7 @@ namespace MagicMirror.Views
     {
         public MagicMirrorsPage()
         {
-            InitializeComponent();
-            //BindingContext="{Binding MagicMirrorsPageViewModel, Source={StaticResource ViewModelLocator}}"
-            var repository = (MagicMirrorRepository)ViewModelLocator.ServiceProvider.GetRequiredService(typeof(MagicMirrorRepository));
-            var navigation = (NavigationService)ViewModelLocator.ServiceProvider.GetRequiredService(typeof(INavigationService));
-            BindingContext = new MagicMirrorsPageViewModel(repository, navigation);
+            InitializeComponent();            
         }
     }
 }

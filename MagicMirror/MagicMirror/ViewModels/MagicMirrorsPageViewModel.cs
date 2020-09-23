@@ -11,16 +11,20 @@ namespace MagicMirror.ViewModels
         private MagicMirrorRepository _magicMirrorRepository;
         private INavigationService _navigation { get; set; }
 
-        public MagicMirrorsPageViewModel(MagicMirrorRepository magicMirrorRepository, INavigationService navigation)
+        public MagicMirrorsPageViewModel(MagicMirrorRepository magicMirrorRepository, INavigationService navigation)        
         {
             _magicMirrorRepository = magicMirrorRepository;
             _navigation = navigation;
+            Mirrors = new ObservableCollection<Models.MagicMirror>();
         }
 
         public AsyncCommand OnLoadedPreferences => new AsyncCommand(async () =>
         {
-            var mirrors = _magicMirrorRepository.GetAll();
-            Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
+            if (_magicMirrorRepository != null)
+            {
+                var mirrors = _magicMirrorRepository.GetAll();
+                Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
+            }
         });
 
         private ObservableCollection<Models.MagicMirror> _mirrors { get; set; }
@@ -42,7 +46,7 @@ namespace MagicMirror.ViewModels
             {
                 _selectedMirror = value;
                 OnPropertyChanged();
-                _navigation.NextPage(typeof(ControlPanelPage));
+                //_navigation?.NextPage(typeof(ControlPanelPage));
                 //NextCommand.RaiseCanExecuteChanged();
             }
         }
