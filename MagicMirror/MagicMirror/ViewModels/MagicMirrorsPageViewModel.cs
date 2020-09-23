@@ -15,7 +15,7 @@ namespace MagicMirror.ViewModels
         {
             _magicMirrorRepository = magicMirrorRepository;
             _navigation = navigation;
-            Mirrors = new ObservableCollection<Models.MagicMirror>();
+            Mirrors = new ObservableCollection<Models.MagicMirror>();            
         }
 
         public AsyncCommand OnLoadedPreferences => new AsyncCommand(async () =>
@@ -24,6 +24,7 @@ namespace MagicMirror.ViewModels
             {
                 var mirrors = _magicMirrorRepository.GetAll();
                 Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
+                Mirrors.Add(new Models.MagicMirror { Name = "m1", Ip = "2112321312" });//todo удалить                
             }
         });
 
@@ -46,7 +47,10 @@ namespace MagicMirror.ViewModels
             {
                 _selectedMirror = value;
                 OnPropertyChanged();
-                //_navigation?.NextPage(typeof(ControlPanelPage));
+                if (_selectedMirror != null)
+                {
+                    _navigation?.NextPage(typeof(ControlPanelPage));
+                }
                 //NextCommand.RaiseCanExecuteChanged();
             }
         }
