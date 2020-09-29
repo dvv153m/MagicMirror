@@ -22,8 +22,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 
             if (_mMContext.Result)
             {
-                Result = "Success connection";
-                _mMContext.MagicMiror.MacAddress = "01";//todo потом удалить
+                Result = "Success connection";                
                 magicMirrorRepository.AddOrUpdate(_mMContext.MagicMiror);
             }
             else

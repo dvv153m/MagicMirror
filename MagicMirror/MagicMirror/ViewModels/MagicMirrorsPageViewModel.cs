@@ -2,7 +2,9 @@
 using MagicMirror.Common.Navigation;
 using MagicMirror.Repository;
 using MagicMirror.Views;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MagicMirror.ViewModels
 {
@@ -10,7 +12,7 @@ namespace MagicMirror.ViewModels
     {
         private MagicMirrorRepository _magicMirrorRepository;
         private INavigationService _navigation { get; set; }
-
+        
         public MagicMirrorsPageViewModel(MagicMirrorRepository magicMirrorRepository, INavigationService navigation)        
         {
             _magicMirrorRepository = magicMirrorRepository;
@@ -18,13 +20,25 @@ namespace MagicMirror.ViewModels
             Mirrors = new ObservableCollection<Models.MagicMirror>();            
         }
 
-        public AsyncCommand OnLoadedPreferences => new AsyncCommand(async () =>
+        public AsyncCommand OnLoadedPreferencesCommand => new AsyncCommand(async () =>
         {
             if (_magicMirrorRepository != null)
             {
                 var mirrors = _magicMirrorRepository.GetAll();
                 Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
-                Mirrors.Add(new Models.MagicMirror { Name = "m1", Ip = "2112321312" });//todo удалить                
+                Mirrors.Add(new Models.MagicMirror { Name = "m1", Ip = "2112321312", BleAddress="123" });//todo удалить                
+            }
+        });
+
+        public AsyncCommand DeleteCommand => new AsyncCommand(async () =>
+        {
+            if (SelectedMirror != null)
+            {
+                var item = Mirrors.Where(m => m.Name == SelectedMirror.Name && m.Ip == SelectedMirror.Ip && m.BleAddress == SelectedMirror.BleAddress).FirstOrDefault();
+                if (item != null)
+                {
+                    Mirrors.Remove(item);
+                }
             }
         });
 

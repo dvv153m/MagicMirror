@@ -12,7 +12,7 @@ namespace MagicMirror.Models
 
         public string SelectedNetwork { get; set; }
 
-        public string MacAddress { get; set; }
+        public string BleAddress { get; set; }
 
         public MagicMirror()
         {

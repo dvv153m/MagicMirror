@@ -32,11 +32,14 @@ namespace MagicMirror.Models.Bluetooth
                         string requestJson = JsonConvert.SerializeObject(wifiRequest);
                         byte[] data = Encoding.UTF8.GetBytes(requestJson);
                         bool result = await response.Characteristic.WriteAsync(data);
-                        byte[] ipData = await response.Characteristic.ReadAsync();
-
-                        var wiFiCredentialsResponse = ipData.Length > 0 ? new WiFiCredentialsResponse
+                        byte[] data2 = await response.Characteristic.ReadAsync();
+                        var wiFiConnectionResponseJson = Encoding.UTF8.GetString(data2);
+                        WiFiConnectionResponse wiFiConnectionResponse = JsonConvert.DeserializeObject<WiFiConnectionResponse>(wiFiConnectionResponseJson);
+                        
+                        var wiFiCredentialsResponse = wiFiConnectionResponse.Ip.Length > 0 ? new WiFiCredentialsResponse
                         {
-                            Ip = Encoding.UTF8.GetString(ipData),
+                            Ip = wiFiConnectionResponse.Ip,
+                            BleAddress  = wiFiConnectionResponse.BleAddress,
                             IsSuccess = true
                         } :
                         new WiFiCredentialsResponse

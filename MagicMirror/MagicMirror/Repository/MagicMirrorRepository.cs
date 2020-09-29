@@ -29,7 +29,7 @@ namespace MagicMirror.Repository
         public void AddOrUpdate(Models.MagicMirror magicMirror)
         {
             //find magicMirror in _cache
-            var mirror = _cache.Where(m => m.MacAddress == magicMirror.MacAddress).FirstOrDefault();
+            var mirror = _cache.Where(m => m.BleAddress == magicMirror.BleAddress).FirstOrDefault();
             if (mirror != null)
             {
                 mirror.Ip = magicMirror.Ip;

@@ -35,6 +35,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 {
                     _mMContext.Result = true;
                     _mMContext.MagicMiror.Ip = response.Ip;
+                    _mMContext.MagicMiror.BleAddress = response.BleAddress;
                 }
                 else
                 {

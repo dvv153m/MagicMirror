@@ -6,7 +6,7 @@ namespace MagicMirror.Models.WiFi
     {
         public string Ip { get; set; }
 
-        //public string MacAddress { get; set; }//todo add mac address in firmware
+        public string BleAddress  { get; set; }
 
         public bool IsSuccess { get; set; }
 
