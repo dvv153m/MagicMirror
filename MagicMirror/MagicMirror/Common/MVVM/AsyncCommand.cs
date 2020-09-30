@@ -14,7 +14,7 @@ namespace MagicMirror.Common.MVVM
         {
             _execute = execute;
             _canExecute = canExecute;
-        }
+        }      
 
         public async Task ExecuteAsync()
         {
@@ -67,6 +67,63 @@ namespace MagicMirror.Common.MVVM
         {
             handler?.Invoke(sender, EventArgs.Empty);
         }
+    }
+
+    public class AsyncCommand<T> : IAsyncParameterCommand<T>
+    {
+        private bool _isExecuting;
+        private readonly Func<T, Task> _execute;
+        private readonly Func<bool> _canExecute;
+
+        public AsyncCommand(Func<T, Task> execute, Func<bool> canExecute = null)
+        {
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public async Task ExecuteAsync(T param)
+        {
+            if (CanExecute())
+            {
+                try
+                {
+                    _isExecuting = true;
+                    await _execute(param);
+                }
+                finally
+                {
+                    _isExecuting = false;
+                }
+            }
+
+            RaiseCanExecuteChanged();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public bool CanExecute()
+        {
+            return !_isExecuting && (_canExecute?.Invoke() ?? true);
+        }
+
+        #region Explicit implementations
+        bool ICommand.CanExecute(object parameter)
+        {
+            return CanExecute();
+        }
+
+        void ICommand.Execute(object parameter)
+        {
+            ExecuteAsync((T)parameter);
+        }
+
+        #endregion
+
+
+        public event EventHandler CanExecuteChanged;
     }
 
 }

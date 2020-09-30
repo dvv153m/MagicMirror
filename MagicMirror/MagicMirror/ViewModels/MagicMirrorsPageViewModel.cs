@@ -2,7 +2,6 @@
 using MagicMirror.Common.Navigation;
 using MagicMirror.Repository;
 using MagicMirror.Views;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -30,11 +29,11 @@ namespace MagicMirror.ViewModels
             }
         });
 
-        public AsyncCommand DeleteCommand => new AsyncCommand(async () =>
-        {
+        public AsyncCommand<string> DeleteCommand => new AsyncCommand<string>(async (bleAddress) =>
+        {            
             if (SelectedMirror != null)
             {
-                var item = Mirrors.Where(m => m.Name == SelectedMirror.Name && m.Ip == SelectedMirror.Ip && m.BleAddress == SelectedMirror.BleAddress).FirstOrDefault();
+                var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
                 if (item != null)
                 {
                     Mirrors.Remove(item);

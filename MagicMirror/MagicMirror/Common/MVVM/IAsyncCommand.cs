@@ -11,4 +11,10 @@ namespace MagicMirror.Common.MVVM
         Task ExecuteAsync();
         bool CanExecute();
     }
+
+    public interface IAsyncParameterCommand<T> : ICommand
+    {
+        Task ExecuteAsync(T param);
+        bool CanExecute();
+    }
 }

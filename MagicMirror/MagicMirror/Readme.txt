@@ -1,6 +1,7 @@
 ﻿Программа для управления зеркалом MagicMirror(https://magicmirror.builders/)
 и для подключения Raspberry pi к WiFi сети через Bluetooth 
 
+0) Бизи индикатор в начале загрузки приложения
 1) Убедится что сначала вызывается конструктор потом OnLoadedCommand
 2) Сделать заглушки для BluetoothService и BluetoothModel чтоб протестить интерфейс
 3) Окошко для отображения ошибок с Expander подробнее
