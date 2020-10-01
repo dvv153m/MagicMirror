@@ -24,14 +24,21 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal" >
-                                    <Label Text="{Binding Name}" FontSize="18" />
-                                    <Label Text="{Binding Ip}" FontSize="14"></Label>
-                                    <Button Grid.Column="1" 
-                                        Text ="Del" 
-                                        HorizontalOptions="EndAndExpand"
-                                        Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
-                                        CommandParameter="{Binding BleAddress}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                        <Label Text="{Binding Name}" FontSize="18" />
+                                        <Label Text="{Binding Ip}" FontSize="14"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                        <Button WidthRequest="60"
+                                                Text ="Edit"                                                 
+                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
+                                                CommandParameter="{Binding BleAddress}" />
+                                        <Button WidthRequest="60"
+                                                Text ="Del"                                                 
+                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
+                                                CommandParameter="{Binding BleAddress}" />
+                                    </StackLayout>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

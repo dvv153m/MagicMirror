@@ -24,21 +24,27 @@ namespace MagicMirror.ViewModels
             if (_magicMirrorRepository != null)
             {
                 var mirrors = _magicMirrorRepository.GetAll();
-                Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
-                Mirrors.Add(new Models.MagicMirror { Name = "m1", Ip = "2112321312", BleAddress="123" });//todo удалить                
+                Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);                                
             }
         });
 
         public AsyncCommand<string> DeleteCommand => new AsyncCommand<string>(async (bleAddress) =>
-        {            
-            if (SelectedMirror != null)
+        {
+            var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
+            if (item != null)
             {
-                var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
-                if (item != null)
-                {
-                    Mirrors.Remove(item);
-                }
+                Mirrors.Remove(item);
             }
+        });
+
+        public AsyncCommand<string> EditCommand => new AsyncCommand<string>(async (bleAddress) =>
+        {
+            //string result = await DisplayPromptAsync("Edit", "Edit MagicMirror name");
+            /*var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
+            if (item != null)
+            {
+                Mirrors.Remove(item);
+            }*/
         });
 
         private ObservableCollection<Models.MagicMirror> _mirrors { get; set; }
