@@ -11,8 +11,6 @@ using Android.Locations;
 using Xamarin.Forms;
 using Android.Gms.Common.Apis;
 using Android.Gms.Location;
-using Xamarin.Essentials;
-using System.Linq;
 
 namespace MagicMirror.Droid
 {
@@ -87,13 +85,11 @@ namespace MagicMirror.Droid
         /// </summary>
         private void TurnOnWiFi()
         {            
-            var profiles = Connectivity.ConnectionProfiles;
-            if (profiles.Contains(ConnectionProfile.WiFi))
+            WifiManager wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(Context.WifiService);
+            if(!wifiManager.IsWifiEnabled)
             {
-                // Active Wi-Fi connection.
-                WifiManager wifiManager = (WifiManager)Android.App.Application.Context.GetSystemService(Context.WifiService);
-                wifiManager.SetWifiEnabled(true);                
-                WifiInfo wInfo = wifiManager.ConnectionInfo;
+                // Active Wi-Fi connection.                
+                wifiManager.SetWifiEnabled(true);                                
             }            
         }
 

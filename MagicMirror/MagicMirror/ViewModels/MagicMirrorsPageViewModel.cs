@@ -33,6 +33,7 @@ namespace MagicMirror.ViewModels
             var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
             if (item != null)
             {
+                _magicMirrorRepository.Remove(item);
                 Mirrors.Remove(item);
             }
         });

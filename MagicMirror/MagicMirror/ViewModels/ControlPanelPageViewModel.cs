@@ -1,31 +1,28 @@
 ﻿using MagicMirror.Common.MVVM;
-using MagicMirror.Common.Navigation;
-using MagicMirror.Models;
-using MagicMirror.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using MagicMirror.Repository;
+using System.Linq;
 
 namespace MagicMirror.ViewModels
 {
     public class ControlPanelPageViewModel : ViewModelBase
     {
         //public string Url => "http://192.168.xxx.xxx:8080/remote.html"
-        public string Url => "http://yy334234234.ru/";
+        public string Url { get; set; }
+        MagicMirrorRepository _magicMirrorRepository;
 
-        public ControlPanelPageViewModel()
+        public ControlPanelPageViewModel(MagicMirrorRepository magicMirrorRepository)
         {
-            //Preferences.Set("12345", "my_value");
-            //var myValue = Preferences.Get("my_key", "default_value");
+            _magicMirrorRepository = magicMirrorRepository;
+            var mirrors = _magicMirrorRepository.GetAll();
+            if (mirrors != null && mirrors.Any())
+            {
+                Url = $"http://{mirrors[0].Ip}:8080/remote.html";
+            }            
         }
 
         public AsyncCommand TestCommand => new AsyncCommand(async () =>
         {
-            var myValue = Preferences.Get("12345", "");
+            /*var myValue = Preferences.Get("12345", "");
             if (string.IsNullOrEmpty(myValue))
             {
                 Preferences.Set("12345", "my_value12");//
@@ -33,8 +30,7 @@ namespace MagicMirror.ViewModels
             else
             {
                 Preferences.Set("12345", "3434");
-            }
-
+            }*/
         });
 
         /*public AsyncCommand NavigatingCommand => new AsyncCommand(async () =>

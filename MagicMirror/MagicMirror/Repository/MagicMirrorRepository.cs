@@ -39,14 +39,25 @@ namespace MagicMirror.Repository
             {
                 _cache.Add(magicMirror);
             }
-            
-            string magicMirrorsJson = JsonConvert.SerializeObject(_cache);
-            Preferences.Set(_key, magicMirrorsJson);
+
+            SaveChanges();
         }
 
         public List<Models.MagicMirror> GetAll()
         {
             return _cache;
+        }
+
+        public void Remove(Models.MagicMirror magicMirror)
+        {
+            _cache.Remove(magicMirror);
+            SaveChanges();
+        }
+
+        private void SaveChanges()
+        {
+            string magicMirrorsJson = JsonConvert.SerializeObject(_cache);
+            Preferences.Set(_key, magicMirrorsJson);
         }
 
     }
