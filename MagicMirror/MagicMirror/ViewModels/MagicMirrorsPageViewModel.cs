@@ -24,7 +24,8 @@ namespace MagicMirror.ViewModels
             if (_magicMirrorRepository != null)
             {
                 var mirrors = _magicMirrorRepository.GetAll();
-                Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);                                
+                Mirrors = new ObservableCollection<Models.MagicMirror>(mirrors);
+                Mirrors.Add(new Models.MagicMirror { Name = "11212", Ip = "12121212" });                
             }
         });
 
@@ -40,6 +41,8 @@ namespace MagicMirror.ViewModels
 
         public AsyncCommand<string> EditCommand => new AsyncCommand<string>(async (bleAddress) =>
         {
+            TestV = true;
+            OnPropertyChanged("TestV");
             //string result = await DisplayPromptAsync("Edit", "Edit MagicMirror name");
             /*var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
             if (item != null)
@@ -74,5 +77,7 @@ namespace MagicMirror.ViewModels
                 //NextCommand.RaiseCanExecuteChanged();
             }
         }
+
+        public bool TestV { get; set; }
     }
 }

@@ -15,7 +15,20 @@
     </ContentPage.Behaviors>
 
     <ContentPage.Content>
+        
         <StackLayout Padding="20" Orientation="Vertical">
+
+            <!--Popup Area-->
+            <ContentView x:Name="popupLoginView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="{Binding TestV}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <StackLayout Orientation="Vertical" HeightRequest="200" WidthRequest="300" BackgroundColor="White">
+                        <Entry Margin="20,20,20,10" Placeholder="Enter mirror name"></Entry>
+                        <Button Margin="20,0,20,0" Text="Save"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+
+            <StackLayout IsVisible="{Binding !TestV}">
             <Label Text="Mirrors:"></Label>
             <ListView HorizontalOptions="FillAndExpand"
                       ItemsSource="{Binding Mirrors}"
@@ -32,7 +45,7 @@
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                         <Button WidthRequest="60"
                                                 Text ="Edit"                                                 
-                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
+                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.EditCommand}"
                                                 CommandParameter="{Binding BleAddress}" />
                                         <Button WidthRequest="60"
                                                 Text ="Del"                                                 
@@ -45,7 +58,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
