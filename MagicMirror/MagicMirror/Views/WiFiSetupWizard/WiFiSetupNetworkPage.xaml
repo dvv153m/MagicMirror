@@ -10,7 +10,7 @@
              x:Class="MagicMirror.Views.WiFiSetupWizard.WiFiSetupNetworkPage">
 
     <ContentPage.Behaviors>
-        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding OnLoadedCommand}"/>
+        <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding GetNetworksCommand}"/>
     </ContentPage.Behaviors>
 
     <ContentPage.Content>
@@ -50,6 +50,10 @@
             <Button HorizontalOptions="Center"
                     Command="{Binding NextCommand}"
                     IsEnabled="{Binding CanExecuteNextBtn}"
+                    Text="Next"></Button>
+            <Button HorizontalOptions="Center"
+                    Command="{Binding GetNetworksCommand}"
+                    IsVisible="{Binding IsNotSuccessResult}"
                     Text="Next"></Button>
         </StackLayout>
     </ContentPage.Content>

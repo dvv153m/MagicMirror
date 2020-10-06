@@ -7,6 +7,7 @@ using MagicMirror.Models.WiFi;
 using MagicMirror.Views.WiFiSetupWizard;
 using System.Collections.ObjectModel;
 using MagicMirror.Services;
+using System.Threading.Tasks;
 
 namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
@@ -23,11 +24,16 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             _navigation = navigation;
         }
 
-        public AsyncCommand OnLoadedCommand => new AsyncCommand(async () =>
+        public AsyncCommand GetNetworksCommand => new AsyncCommand(async () =>
         {
-            IsBusy = true;
+            await TryGetNetworksAsync();
+        });
+
+        private async Task TryGetNetworksAsync()
+        {
             try
             {
+                IsBusy = true;
                 var bluetoothClient = new BluetoothModel();
                 WiFiNetworksResponse wifiResponse = await bluetoothClient.GetNetworksAsync(_mMContext.Device);
                 if (wifiResponse.IsSuccess)
@@ -40,7 +46,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                     else
                     {
                         await App.Current.MainPage.DisplayAlert("Alert", "Not determine wifi networks. Please try again", "OK");
-                        //add button try again get networks
+                        IsNotSuccessResult = true;
                     }
                 }
                 else
@@ -48,11 +54,12 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                     if (wifiResponse.ErrorCode == 2)
                     {
                         //todo вручную вводить имя сети и пароль и потом перезапустить зеркало
+                        IsNotSuccessResult = true;
                     }
                     else
                     {
                         //display this error wifiResponse.ErrorInfo                                                              
-                        await App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please reconnect", "OK");                        
+                        await App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please reconnect", "OK");
                         await _bluetoothService.DisconnectAsync(_mMContext.Device);
                         _navigation.NextPage(typeof(SearchingDevicePage));
                     }
@@ -62,7 +69,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             {
                 IsBusy = false;
             }
-        });
+        }
 
         public AsyncCommand NextCommand => new AsyncCommand(async () => {
 
@@ -70,6 +77,17 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             _navigation.NextPage(typeof(WifiSetupPasswordPage));
 
         }, () => !IsBusy);
+
+        private bool _isNotSuccessResult { get; set; }
+        public bool IsNotSuccessResult
+        {
+            get { return _isNotSuccessResult; }
+            set
+            {
+                _isNotSuccessResult = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<string> _networks { get; set; }
         public ObservableCollection<string> Networks

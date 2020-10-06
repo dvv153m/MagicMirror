@@ -29,16 +29,16 @@
                 <Label VerticalOptions="Start"
                        HorizontalOptions="Center"
                        Text="Device is success connected"
-                       IsVisible="{Binding IsVisibleSuccessConnection}"/>
+                       IsVisible="{Binding IsSuccessConnection}"/>
                 <Label VerticalOptions="Start"
                        HorizontalOptions="Center"
                        Text="Device not connected"
-                       IsVisible="{Binding IsVisibleNotConnection}"/>
+                       IsVisible="{Binding IsNotSuccessConnection}"/>
             </StackLayout>
 
             <Button HorizontalOptions="Center"
-                    Command="{Binding NextCommand}"
-                    IsEnabled="{Binding CanExecuteNextBtn}"
+                    Command="{Binding TryAgainCommand}"
+                    IsVisible="{Binding IsNotSuccessConnection}"
                     Text="Next"></Button>
         </StackLayout>
     </ContentPage.Content>

@@ -40,25 +40,26 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 await _bluetoothService.ConnectAsync(_mMContext.Device);
                 if (_mMContext.Device.State == Plugin.BLE.Abstractions.DeviceState.Connected)
                 {
-                    IsVisibleSuccessConnection = true;
+                    IsSuccessConnection = true;
                     CanExecuteNextBtn = true;
+                    _navigation.NextPage(typeof(WiFiSetupNetworkPage));
                 }
                 else
                 {
 
-                    IsVisibleNotConnection = true;
+                    IsNotSuccessConnection = true;
                 }
             }
             catch (DeviceConnectionException e)
             {
                 //todo add display info
                 // ... could not connect to device
-                IsVisibleNotConnection = true;
+                IsNotSuccessConnection = true;
             }
             catch (Exception ex)
             {
                 //generic
-                IsVisibleNotConnection = true;
+                IsNotSuccessConnection = true;
             }
             finally
             {
@@ -66,30 +67,31 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             }
         }
 
-        public AsyncCommand NextCommand => new AsyncCommand(async () => {
-            
-            _navigation.NextPage(typeof(WiFiSetupNetworkPage));
+        public AsyncCommand TryAgainCommand => new AsyncCommand(async () => {
 
-        }, () => IsVisibleSuccessConnection && !IsBusy);
+            await ConnectingToDeviceAsync();
 
-        private bool _isVisibleSuccessConnection { get; set; }
-        public bool IsVisibleSuccessConnection
+        }, () => IsNotSuccessConnection && !IsBusy);
+
+
+        private bool _isSuccessConnection { get; set; }
+        public bool IsSuccessConnection
         {
-            get { return _isVisibleSuccessConnection; }
+            get { return _isSuccessConnection; }
             set
             {
-                _isVisibleSuccessConnection = value;
+                _isSuccessConnection = value;
                 OnPropertyChanged();
             }
         }
 
-        private bool _isVisibleNotConnection { get; set; }
-        public bool IsVisibleNotConnection
+        private bool _isNotSuccessConnection { get; set; }
+        public bool IsNotSuccessConnection
         {
-            get { return _isVisibleNotConnection; }
+            get { return _isNotSuccessConnection; }
             set
             {
-                _isVisibleNotConnection = value;
+                _isNotSuccessConnection = value;
                 OnPropertyChanged();
             }
         }
