@@ -8,11 +8,13 @@
              Title="Magic Mirror"
              BindingContext="{Binding ControlPanelPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.ControlPanelPage">
+
     <ContentPage.Content>
         <StackLayout Margin="10">
 
             <StackLayout Orientation="Horizontal">
                 <Button Text="Back" HorizontalOptions="StartAndExpand" Clicked="OnBack_Clicked" />
+                <Button Text="Reload" HorizontalOptions="StartAndExpand" Clicked="Reload_Clicked" />
                 <Button Text="Forward" HorizontalOptions="EndAndExpand" Clicked="OnForward_Clicked" />
             </StackLayout>
 
@@ -34,10 +36,10 @@
                     </behaviors:BehaviorCollection>-->
             </WebView>
 
-            <Button 
+            <!--<Button 
                 Text="Test"
                 Command="{Binding TestCommand}"                
-                Margin="10"/>
+                Margin="10"/>-->
 
         </StackLayout>
     </ContentPage.Content>

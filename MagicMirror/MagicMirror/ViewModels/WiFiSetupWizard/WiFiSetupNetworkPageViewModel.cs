@@ -51,7 +51,8 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 }
                 else
                 {
-                    if (wifiResponse.ErrorCode == 2)
+                    _navigation.NextPage(typeof(WiFiSetupCredentialsPage));
+                    /*if (wifiResponse.ErrorCode == 2)
                     {
                         //todo вручную вводить имя сети и пароль и потом перезапустить зеркало
                         IsNotSuccessResult = true;
@@ -62,7 +63,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                         await App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please reconnect", "OK");
                         await _bluetoothService.DisconnectAsync(_mMContext.Device);
                         _navigation.NextPage(typeof(SearchingDevicePage));
-                    }
+                    }*/
                 }
             }
             finally

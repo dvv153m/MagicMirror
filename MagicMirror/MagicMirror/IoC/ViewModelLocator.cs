@@ -66,6 +66,8 @@ namespace MagicMirror.IoC
 
         public WifiSetupPasswordPageViewModel WifiSetupPasswordPageViewModel => _serviceProvider.GetRequiredService<WifiSetupPasswordPageViewModel>();
 
+        public WiFiSetupCredentialsPageViewModel WiFiSetupCredentialsPageViewModel => _serviceProvider.GetRequiredService<WiFiSetupCredentialsPageViewModel>();
+
         public FinishPageViewModel FinishPageViewModel => _serviceProvider.GetRequiredService<FinishPageViewModel>();
 
         public DataContext MMContext => _serviceProvider.GetRequiredService<DataContext>();

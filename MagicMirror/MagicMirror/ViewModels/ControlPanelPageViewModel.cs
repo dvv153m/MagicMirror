@@ -1,6 +1,10 @@
 ﻿using MagicMirror.Common.MVVM;
+using MagicMirror.Common.Navigation;
 using MagicMirror.Repository;
+using MagicMirror.Views;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MagicMirror.ViewModels
 {
@@ -8,16 +12,37 @@ namespace MagicMirror.ViewModels
     {
         //public string Url => "http://192.168.xxx.xxx:8080/remote.html"
         public string Url { get; set; }
-        MagicMirrorRepository _magicMirrorRepository;
 
-        public ControlPanelPageViewModel(MagicMirrorRepository magicMirrorRepository)
+        private MagicMirrorRepository _magicMirrorRepository;
+        private List<Models.MagicMirror> _magicMirrors;
+        private INavigationService _navigation;
+
+        public ControlPanelPageViewModel(MagicMirrorRepository magicMirrorRepository, INavigationService navigation)
         {
             _magicMirrorRepository = magicMirrorRepository;
-            var mirrors = _magicMirrorRepository.GetAll();
-            if (mirrors != null && mirrors.Any())
+            _navigation = navigation;                                    
+        }
+
+        public override Task InitializeAsync(object navigationData)
+        {
+            Models.MagicMirror magicMirror;
+            if (navigationData is Models.MagicMirror)
             {
-                Url = $"http://{mirrors[0].Ip}:8080/remote.html";
-            }            
+                _magicMirrors = _magicMirrorRepository.GetAll();
+                magicMirror = (Models.MagicMirror)navigationData;
+                var currentMM = _magicMirrors.Where(m => m.Ip == magicMirror.Ip).FirstOrDefault();
+                if (currentMM != null)
+                {
+                    Url = $"http://{currentMM.Ip}:8080/remote.html";
+                }
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please select another mirror", "OK");
+                    _navigation.NextPage(typeof(MagicMirrorsPage));
+                }
+            }
+
+            return base.InitializeAsync(navigationData);
         }
 
         public AsyncCommand TestCommand => new AsyncCommand(async () =>

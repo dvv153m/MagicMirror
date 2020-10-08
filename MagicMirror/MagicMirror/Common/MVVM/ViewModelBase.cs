@@ -1,6 +1,7 @@
 ﻿
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace MagicMirror.Common.MVVM
 {
@@ -26,6 +27,11 @@ namespace MagicMirror.Common.MVVM
             {
                 propertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public virtual Task InitializeAsync(object navigationData)
+        {
+            return Task.FromResult(false);
         }
     }
 }

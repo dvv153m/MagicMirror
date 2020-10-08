@@ -28,10 +28,10 @@ namespace MagicMirror.Views
 
         private void OnBack_Clicked(object sender, EventArgs e)
         {            
-            /*if (webView.CanGoBack)
+            if (webView.CanGoBack)
             {
                 webView.GoBack();
-            }*/
+            }
         }
 
         private void OnForward_Clicked(object sender, EventArgs e)
@@ -40,6 +40,11 @@ namespace MagicMirror.Views
             {
                 webView.GoForward();
             }
+        }
+
+        private void Reload_Clicked(object sender, EventArgs e)
+        {
+            webView.Reload();
         }
     }
 }
