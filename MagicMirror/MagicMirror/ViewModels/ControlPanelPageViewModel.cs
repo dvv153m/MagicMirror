@@ -38,7 +38,7 @@ namespace MagicMirror.ViewModels
                 else
                 {
                     App.Current.MainPage.DisplayAlert("Alert", "Something went wrong, please select another mirror", "OK");
-                    _navigation.NextPage(typeof(MagicMirrorsPage));
+                    _navigation.NextPage<MagicMirrorsPage>();
                 }
             }
 

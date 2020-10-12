@@ -101,8 +101,8 @@ namespace MagicMirror.Models.Bluetooth
                             ErrorCode = (int)BluetoothErrorCode.NotValidCredentials
                         };
                         return wiFiCredentialsResponse;*/
-                    /*}
-                    else
+                    }
+                    /*else
                     {
                         return new WiFiCredentialsResponse() { IsSuccess = false, ErrorCode = response.ErrorCode };
                     }*/

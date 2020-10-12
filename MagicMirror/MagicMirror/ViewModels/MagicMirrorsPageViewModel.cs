@@ -72,7 +72,7 @@ namespace MagicMirror.ViewModels
                 OnPropertyChanged();
                 if (_selectedMirror != null)
                 {
-                    _navigation?.NextPage(typeof(ControlPanelPage), SelectedMirror);
+                    _navigation?.NextPage<ControlPanelPage>(SelectedMirror);
                 }
                 //NextCommand.RaiseCanExecuteChanged();
             }

@@ -48,7 +48,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             finally
             {
                 IsBusy = false;
-                _navigation.NextPage(typeof(FinishPage));
+                _navigation.NextPage<FinishPage>();
             }
 
         }, () => CanExecuteConnect);

@@ -76,7 +76,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand NextCommand => new AsyncCommand(async () => {
 
             _mMContext.Device = SelectedDevice;
-            _navigation.NextPage(typeof(DevicePage));            
+            _navigation.NextPage<DevicePage>();
 
         }, () => SelectedDevice != null);
 

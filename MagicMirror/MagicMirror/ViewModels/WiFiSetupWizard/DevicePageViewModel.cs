@@ -5,8 +5,6 @@ using MagicMirror.Services;
 using MagicMirror.Views.WiFiSetupWizard;
 using Plugin.BLE.Abstractions.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MagicMirror.ViewModels.WiFiSetupWizard
@@ -42,7 +40,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 {
                     IsSuccessConnection = true;
                     CanExecuteNextBtn = true;
-                    _navigation.NextPage(typeof(WiFiSetupNetworkPage));
+                    _navigation.NextPage<WiFiSetupNetworkPage>();
                 }
                 else
                 {

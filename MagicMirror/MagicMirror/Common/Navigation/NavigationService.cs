@@ -1,7 +1,6 @@
 ﻿using MagicMirror.Common.MVVM;
 using MagicMirror.IoC;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Xamarin.Forms;
 
 namespace MagicMirror.Common.Navigation
@@ -13,9 +12,9 @@ namespace MagicMirror.Common.Navigation
             Application.Current.MainPage.Navigation.PushAsync(page);
         }*/
 
-        public void NextPage(Type typeView, object navigationData = null)
+        public void NextPage<T>(object navigationData = null) where T : ContentPage
         {            
-            var page = (Page)ViewModelLocator.ServiceProvider.GetRequiredService(typeView);
+            var page = (Page)ViewModelLocator.ServiceProvider.GetRequiredService(typeof(T));
             var bindingContext = page.BindingContext as ViewModelBase;
             if (navigationData != null)
             {

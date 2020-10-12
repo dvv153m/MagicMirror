@@ -35,7 +35,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 
                 //перенаправляем на поиск блутус устройств
                 //todo сделать чтоб автоматически подключался к блутус и дергал эту характеристику на чтение
-                _navigation.NextPage(typeof(SearchingDevicePage));
+                _navigation.NextPage<SearchingDevicePage>();
 
                 /*if (response.IsSuccess)
                 {
@@ -54,7 +54,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
             finally
             {
                 IsBusy = false;
-                _navigation.NextPage(typeof(FinishPage));
+                _navigation.NextPage<FinishPage>();
             }
         });
 

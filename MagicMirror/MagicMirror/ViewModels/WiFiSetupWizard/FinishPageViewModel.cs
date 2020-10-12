@@ -34,7 +34,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand GoToMainViewCommand => new AsyncCommand(async () => {
             
             await _bluetoothService.DisconnectAsync(_mMContext.Device);
-            _navigation.NextPage(typeof(ControlPanelPage));
+            _navigation.NextPage<ControlPanelPage>();
 
         });
 

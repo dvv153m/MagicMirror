@@ -48,7 +48,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 }
                 else
                 {
-                    _navigation.NextPage(typeof(WiFiSetupCredentialsPage));
+                    _navigation.NextPage<WiFiSetupCredentialsPage>();
                     /*if (wifiResponse.ErrorCode == 2)
                     {
                         //todo вручную вводить имя сети и пароль и потом перезапустить зеркало
@@ -72,7 +72,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand NextCommand => new AsyncCommand(async () => {
 
             _mMContext.MagicMiror.SelectedNetwork = SelectedNetwork;
-            _navigation.NextPage(typeof(WifiSetupPasswordPage));
+            _navigation.NextPage<WifiSetupPasswordPage>();
 
         }, () => !IsBusy);
 
