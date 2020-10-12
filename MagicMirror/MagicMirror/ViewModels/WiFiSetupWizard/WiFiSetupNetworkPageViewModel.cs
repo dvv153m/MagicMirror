@@ -6,21 +6,18 @@ using MagicMirror.Models.Bluetooth;
 using MagicMirror.Models.WiFi;
 using MagicMirror.Views.WiFiSetupWizard;
 using System.Collections.ObjectModel;
-using MagicMirror.Services;
 using System.Threading.Tasks;
 
 namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class WiFiSetupNetworkPageViewModel : ViewModelBase
     {
-        private INavigationService _navigation;
-        private BluetoothService _bluetoothService;
+        private INavigationService _navigation;        
         private DataContext _mMContext;
 
-        public WiFiSetupNetworkPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation)
+        public WiFiSetupNetworkPageViewModel(DataContext mMContext, INavigationService navigation)
         {
-            _mMContext = mMContext;
-            _bluetoothService = bluetoothService;
+            _mMContext = mMContext;            
             _navigation = navigation;
         }
 

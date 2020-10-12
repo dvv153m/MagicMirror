@@ -12,6 +12,8 @@ namespace MagicMirror.Models
 
         public static readonly Guid WiFiCredentialsCharacteristicsGuid = new Guid("fffffffffffffffffffffffffffffff3");
 
+        public static readonly Guid WiFiCredentialsCharacteristicsV2Guid = new Guid("fffffffffffffffffffffffffffffff4");
+
         public static string AddDeviceTopic = "AddDevice";
         public static string ScanStoppedTopic = "ScanStopped";
     }

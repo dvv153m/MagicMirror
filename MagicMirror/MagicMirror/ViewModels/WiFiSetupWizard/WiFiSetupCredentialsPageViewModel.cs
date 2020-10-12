@@ -5,20 +5,18 @@ using MagicMirror.Models.Bluetooth;
 using MagicMirror.Models.WiFi;
 using MagicMirror.Services;
 using MagicMirror.Views.WiFiSetupWizard;
-
+using System.Threading.Tasks;
 
 namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
     public class WiFiSetupCredentialsPageViewModel : ViewModelBase
     {
-        private INavigationService _navigation;
-        private BluetoothService _bluetoothService;
+        private INavigationService _navigation;        
         private DataContext _mMContext;
 
-        public WiFiSetupCredentialsPageViewModel(DataContext mMContext, BluetoothService bluetoothService, INavigationService navigation)
+        public WiFiSetupCredentialsPageViewModel(DataContext mMContext, INavigationService navigation)
         {
-            _mMContext = mMContext;
-            _bluetoothService = bluetoothService;
+            _mMContext = mMContext;            
             _navigation = navigation;
         }
 
@@ -30,8 +28,16 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 var wiFiCredentialsRequest = new WiFiCredentialsRequest { Ssid = Ssid, Password = Password };
                 //var wiFiCredentialsRequest = new WiFiCredentialsRequest { Ssid = "SCOUT_CORP", Password = "IntelSoft2033" };
                 var bluetoothClient = new BluetoothModel();
-                WiFiCredentialsResponse response = await bluetoothClient.SetWifiCredentialsAsync(_mMContext.Device, wiFiCredentialsRequest);
-                if (response.IsSuccess)
+                await bluetoothClient.SetWifiCredentialsV2Async(_mMContext.Device, wiFiCredentialsRequest);
+
+                //подождать около 20 сек
+                await Task.Delay(20000);
+
+                //перенаправляем на поиск блутус устройств
+                //todo сделать чтоб автоматически подключался к блутус и дергал эту характеристику на чтение
+                _navigation.NextPage(typeof(SearchingDevicePage));
+
+                /*if (response.IsSuccess)
                 {
                     _mMContext.Result = true;
                     _mMContext.MagicMiror.Ip = response.Ip;
@@ -43,7 +49,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                     //добавить кнопку подробно если есть описание эксепшена
                     _mMContext.Result = false;
                     _mMContext.ErrorInfo = "Failed to connect to wifi";
-                }
+                }*/
             }
             finally
             {

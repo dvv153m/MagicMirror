@@ -102,7 +102,10 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         {
             MessagingCenter.Subscribe<BluetoothService, IDevice>(this, Constants.AddDeviceTopic, (s, device) =>
             {
-                Devices.Add(device);
+                if (!string.IsNullOrEmpty(device.Name))
+                {
+                    Devices.Add(device);
+                }
             });
 
             MessagingCenter.Subscribe<BluetoothService>(this, Constants.ScanStoppedTopic, (s) =>

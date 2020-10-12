@@ -15,7 +15,7 @@ namespace MagicMirror.Models.Bluetooth
     public class BluetoothModel
     {
         /// <summary>
-        /// Соединение устройства с wifi сетью
+        /// Соединение устройства с wifi сетью (способ 1)
         /// </summary>
         /// <param name="device">Устройство</param>
         /// <param name="wifiRequest">Запрос</param>
@@ -62,6 +62,59 @@ namespace MagicMirror.Models.Bluetooth
             catch (Exception ex)
             {
                 return new WiFiCredentialsResponse() { IsSuccess = false, ErrorCode = (int)BluetoothErrorCode.Unknown, ErrorInfo = ex.ToString() };
+            }
+        }
+
+        /// <summary>
+        /// Соединение устройства с wifi сетью (способ 2). Сохранение wpa_supplicant и перезагрузка.
+        /// </summary>
+        /// <param name="device">Устройство</param>
+        /// <param name="wifiRequest">Запрос</param>
+        /// <returns>Результат соединения с wifi сетью</returns>
+        public async Task SetWifiCredentialsV2Async(IDevice device, WiFiCredentialsRequest wifiRequest)
+        {
+            try
+            {
+                if (device.State == Plugin.BLE.Abstractions.DeviceState.Connected)
+                {
+                    WiFiResponse response = await GetCharacteristicAsync(device, Constants.WiFiCredentialsCharacteristicsV2Guid);
+                    if (response.IsSuccess)
+                    {
+                        string requestJson = JsonConvert.SerializeObject(wifiRequest);
+                        byte[] data = Encoding.UTF8.GetBytes(requestJson);
+                        //см чтобудет после выполнения метода. На распберике будет перезагрузка
+                        bool result = await response.Characteristic.WriteAsync(data);
+                        
+                        /*byte[] data2 = await response.Characteristic.ReadAsync();
+                        var wiFiConnectionResponseJson = Encoding.UTF8.GetString(data2);
+                        WiFiConnectionResponse wiFiConnectionResponse = JsonConvert.DeserializeObject<WiFiConnectionResponse>(wiFiConnectionResponseJson);
+
+                        var wiFiCredentialsResponse = wiFiConnectionResponse.Ip.Length > 0 ? new WiFiCredentialsResponse
+                        {
+                            Ip = wiFiConnectionResponse.Ip,
+                            BleAddress = wiFiConnectionResponse.BleAddress,
+                            IsSuccess = true
+                        } :
+                        new WiFiCredentialsResponse
+                        {
+                            IsSuccess = false,
+                            ErrorCode = (int)BluetoothErrorCode.NotValidCredentials
+                        };
+                        return wiFiCredentialsResponse;*/
+                    /*}
+                    else
+                    {
+                        return new WiFiCredentialsResponse() { IsSuccess = false, ErrorCode = response.ErrorCode };
+                    }*/
+                }
+                else
+                {
+                    return ;
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
 
