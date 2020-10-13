@@ -10,13 +10,13 @@
              x:Class="MagicMirror.Views.ControlPanelPage">
 
     <ContentPage.Content>
-        <StackLayout Margin="10">
+        <StackLayout>
 
-            <StackLayout Orientation="Horizontal">
+            <!--<StackLayout Orientation="Horizontal">
                 <Button Text="Back" HorizontalOptions="StartAndExpand" Clicked="OnBack_Clicked" />
                 <Button Text="Reload" HorizontalOptions="StartAndExpand" Clicked="Reload_Clicked" />
                 <Button Text="Forward" HorizontalOptions="EndAndExpand" Clicked="OnForward_Clicked" />
-            </StackLayout>
+            </StackLayout>-->
 
             <WebView x:Name="webView"
                      WidthRequest="1000"

@@ -15,10 +15,10 @@ namespace MagicMirror.Views
         public ControlPanelPage()
         {
             InitializeComponent();
-            webView.Navigated += WebView_Navigated;
+            //webView.Navigated += WebView_Navigated;
         }
 
-        private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+        /*private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
             if (e.Result != WebNavigationResult.Success)
             {
@@ -45,6 +45,6 @@ namespace MagicMirror.Views
         private void Reload_Clicked(object sender, EventArgs e)
         {
             webView.Reload();
-        }
+        }*/
     }
 }

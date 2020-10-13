@@ -11,7 +11,18 @@ namespace MagicMirror.ViewModels
     public class ControlPanelPageViewModel : ViewModelBase
     {
         //public string Url => "http://192.168.xxx.xxx:8080/remote.html"
-        public string Url { get; set; }
+        
+        public string Url
+        {
+            get { return _url; }
+            set 
+            {
+                _url = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _url;
 
         private MagicMirrorRepository _magicMirrorRepository;
         private List<Models.MagicMirror> _magicMirrors;
@@ -33,7 +44,7 @@ namespace MagicMirror.ViewModels
                 var currentMM = _magicMirrors.Where(m => m.Ip == magicMirror.Ip).FirstOrDefault();
                 if (currentMM != null)
                 {
-                    Url = $"http://{currentMM.Ip}:8080/remote.html";
+                    Url = $"http://{currentMM.Ip}:8080/remote.html";                    
                 }
                 else
                 {
