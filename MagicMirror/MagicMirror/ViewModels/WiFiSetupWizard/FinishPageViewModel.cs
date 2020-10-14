@@ -4,7 +4,7 @@ using MagicMirror.Models;
 using MagicMirror.Repository;
 using MagicMirror.Services;
 using MagicMirror.Views;
-
+using MagicMirror.Views.WiFiSetupWizard;
 
 namespace MagicMirror.ViewModels.WiFiSetupWizard
 {
@@ -34,8 +34,14 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
         public AsyncCommand GoToMainViewCommand => new AsyncCommand(async () => {
             
             await _bluetoothService.DisconnectAsync(_mMContext.Device);
-            _navigation.NextPage<ControlPanelPage>();
-
+            if (_mMContext.Result)
+            {
+                _navigation.NextPage<ControlPanelPage>();
+            }
+            else
+            {
+                _navigation.NextPage<SearchingDevicePage>();
+            }
         });
 
         private string _result;

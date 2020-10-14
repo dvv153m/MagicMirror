@@ -14,7 +14,7 @@
                 HorizontalOptions="CenterAndExpand" />
             <Button HorizontalOptions="Center"
                     Command="{Binding GoToMainViewCommand}"
-                    Text="Go to the main page"/>
+                    Text="Finish"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -39,7 +39,7 @@
             <Button HorizontalOptions="Center"
                     Command="{Binding TryAgainCommand}"
                     IsVisible="{Binding IsNotSuccessConnection}"
-                    Text="Next"></Button>
+                    Text="Try again"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

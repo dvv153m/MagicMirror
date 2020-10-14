@@ -31,7 +31,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
                 await bluetoothClient.SetWifiCredentialsV2Async(_mMContext.Device, wiFiCredentialsRequest);
 
                 //подождать около 20 сек
-                await Task.Delay(20000);
+                await Task.Delay(27000);
 
                 //перенаправляем на поиск блутус устройств
                 //todo сделать чтоб автоматически подключался к блутус и дергал эту характеристику на чтение

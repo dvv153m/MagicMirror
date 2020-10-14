@@ -69,7 +69,7 @@ namespace MagicMirror.ViewModels.WiFiSetupWizard
 
             await ConnectingToDeviceAsync();
 
-        }, () => IsNotSuccessConnection && !IsBusy);
+        });//() => IsNotSuccessConnection && !IsBusy
 
 
         private bool _isSuccessConnection { get; set; }

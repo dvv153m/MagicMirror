@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         
-        <StackLayout Padding="20" Orientation="Vertical">
+        <StackLayout Padding="7" Orientation="Vertical">
 
             <!--Popup Area-->
             <ContentView x:Name="popupLoginView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="{Binding TestV}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
