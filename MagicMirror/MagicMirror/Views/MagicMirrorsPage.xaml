@@ -45,22 +45,22 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal">
+                                <StackLayout  Orientation="Horizontal">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                                         <Label Text="{Binding Name}" FontSize="18" />
-                                        <Label Text="{Binding Ip}" FontSize="14"></Label>
+                                        <Label Text="{Binding Ip}" FontSize="11"></Label>
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
-                                        <Button WidthRequest="60"
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                            <Button WidthRequest="60"
                                                 Text ="Edit"                                                 
                                                 Command="{Binding Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.EditCommand}"
                                                 CommandParameter="{Binding BleAddress}" />
-                                        <Button WidthRequest="60"
+                                            <Button WidthRequest="60"
                                                 Text ="Del"                                                 
                                                 Command="{Binding Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
                                                 CommandParameter="{Binding BleAddress}" />
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
