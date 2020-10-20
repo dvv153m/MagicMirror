@@ -3,13 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior"
+             xmlns:behaviors="clr-namespace:MagicMirror.Common.Behavior" xmlns:converters="clr-namespace:MagicMirror.Common.MVVM.Converters"
              mc:Ignorable="d"
              x:Name="MagicMirrorsPageName"
              Title="Magic Mirror"
              BindingContext="{Binding MagicMirrorsPageViewModel, Source={StaticResource ViewModelLocator}}"
              x:Class="MagicMirror.Views.MagicMirrorsPage">
 
+    <ContentPage.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </ContentPage.Resources>
+    
     <ContentPage.Behaviors>
         <behaviors:EventToCommandBehavior EventName="Appearing" Command="{Binding OnLoadedPreferencesCommand}"/>
     </ContentPage.Behaviors>
@@ -17,18 +21,22 @@
     <ContentPage.Content>
         
         <StackLayout Padding="7" Orientation="Vertical">
-
+            
             <!--Popup Area-->
-            <ContentView x:Name="popupLoginView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="{Binding TestV}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+            <ContentView x:Name="popupLoginView" BackgroundColor="#C0808080" Padding="10, 0" IsVisible="{Binding IsShowDialog}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <StackLayout Orientation="Vertical" HeightRequest="200" WidthRequest="300" BackgroundColor="White">
-                        <Entry Margin="20,20,20,10" Placeholder="Enter mirror name"></Entry>
-                        <Button Margin="20,0,20,0" Text="Save"></Button>
+                        <Entry Margin="20,20,20,10"
+                               Placeholder="Enter mirror name"
+                               Text="{Binding NewName}"></Entry>
+                        <Button Margin="20,0,20,0"
+                                Text="Save"
+                                Command="{Binding SaveCommand}"></Button>
                     </StackLayout>
                 </StackLayout>
             </ContentView>
 
-            <StackLayout IsVisible="{Binding !TestV}">
+            <StackLayout IsVisible="{Binding IsShowDialog, Converter={StaticResource InverseBooleanConverter}}">
             <Label Text="Mirrors:"></Label>
             <ListView HorizontalOptions="FillAndExpand"
                       ItemsSource="{Binding Mirrors}"
@@ -38,18 +46,18 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                                         <Label Text="{Binding Name}" FontSize="18" />
                                         <Label Text="{Binding Ip}" FontSize="14"></Label>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
                                         <Button WidthRequest="60"
                                                 Text ="Edit"                                                 
-                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.EditCommand}"
+                                                Command="{Binding Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.EditCommand}"
                                                 CommandParameter="{Binding BleAddress}" />
                                         <Button WidthRequest="60"
                                                 Text ="Del"                                                 
-                                                Command="{Binding  Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
+                                                Command="{Binding Source={x:Reference MagicMirrorsPageName}, Path=BindingContext.DeleteCommand}"
                                                 CommandParameter="{Binding BleAddress}" />
                                     </StackLayout>
                                 </StackLayout>

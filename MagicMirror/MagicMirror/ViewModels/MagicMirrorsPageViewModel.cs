@@ -39,16 +39,28 @@ namespace MagicMirror.ViewModels
             }
         });
 
+        private string _currentBleAddress;
         public AsyncCommand<string> EditCommand => new AsyncCommand<string>(async (bleAddress) =>
         {
-            TestV = true;
-            OnPropertyChanged("TestV");
-            //string result = await DisplayPromptAsync("Edit", "Edit MagicMirror name");
-            /*var item = Mirrors.Where(m => m.BleAddress == bleAddress).FirstOrDefault();
-            if (item != null)
+            IsShowDialog = true;
+            _currentBleAddress = bleAddress;                        
+        });
+
+        public AsyncCommand SaveCommand => new AsyncCommand(async() =>
+        {
+            try
             {
-                Mirrors.Remove(item);
-            }*/
+                var item = Mirrors.Where(m => m.BleAddress == _currentBleAddress).FirstOrDefault();
+                if (item != null)
+                {
+                    item.Name = NewName;
+                    _magicMirrorRepository.AddOrUpdate(item);
+                }
+            }
+            finally
+            {
+                IsShowDialog = false;
+            }
         });
 
         private ObservableCollection<Models.MagicMirror> _mirrors { get; set; }
@@ -78,6 +90,26 @@ namespace MagicMirror.ViewModels
             }
         }
 
-        public bool TestV { get; set; }
+        private string _newName;
+        public string NewName
+        {
+            get { return _newName; }
+            set 
+            {
+                _newName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isShowDialog;
+        public bool IsShowDialog 
+        {
+            get { return _isShowDialog; }
+            set 
+            {
+                _isShowDialog = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
