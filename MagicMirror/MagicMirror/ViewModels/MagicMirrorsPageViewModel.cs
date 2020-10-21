@@ -43,7 +43,12 @@ namespace MagicMirror.ViewModels
         public AsyncCommand<string> EditCommand => new AsyncCommand<string>(async (bleAddress) =>
         {
             IsShowDialog = true;
-            _currentBleAddress = bleAddress;                        
+            _currentBleAddress = bleAddress;
+            var item = Mirrors.Where(m => m.BleAddress == _currentBleAddress).FirstOrDefault();
+            if (item != null)
+            {
+                NewName = item.Name;
+            }                
         });
 
         public AsyncCommand SaveCommand => new AsyncCommand(async() =>
@@ -55,6 +60,7 @@ namespace MagicMirror.ViewModels
                 {
                     item.Name = NewName;
                     _magicMirrorRepository.AddOrUpdate(item);
+                    Mirrors = new ObservableCollection<Models.MagicMirror>(Mirrors);                    
                 }
             }
             finally
