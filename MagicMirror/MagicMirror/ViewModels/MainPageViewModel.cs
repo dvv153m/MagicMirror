@@ -19,7 +19,7 @@ namespace MagicMirror.ViewModels
             MainMenuItems = new List<MainMenuItem>()
             {
                 new MainMenuItem() { Title = "Main", Icon = "menu_inbox.png", TargetType = typeof(MagicMirrorsPage) },
-                new MainMenuItem() { Title = "Settings", Icon = "menu_stock.png", TargetType = typeof(SearchingDevicePage) }
+                new MainMenuItem() { Title = "Add MagicMirror", Icon = "menu_stock.png", TargetType = typeof(SearchingDevicePage) }
             };            
         }
 

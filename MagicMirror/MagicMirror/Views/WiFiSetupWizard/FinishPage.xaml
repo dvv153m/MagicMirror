@@ -9,7 +9,8 @@
              x:Class="MagicMirror.Views.WiFiSetupWizard.FinishPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Result}"
+            <Label Margin="0,55,0,0"
+                Text="{Binding Result}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Button HorizontalOptions="Center"

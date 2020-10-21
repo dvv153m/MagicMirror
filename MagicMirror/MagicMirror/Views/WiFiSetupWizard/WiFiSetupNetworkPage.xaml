@@ -18,7 +18,8 @@
                      VerticalOptions="FillAndExpand"
                      Margin="10"
                      Orientation="Vertical">
-            <Label HorizontalOptions="Center"
+            <Label Margin="0,55,0,0"
+                   HorizontalOptions="Center"
                    VerticalOptions="Start"
                    Text="Get wifi networks..."
                    IsVisible="{Binding IsBusy}"/>

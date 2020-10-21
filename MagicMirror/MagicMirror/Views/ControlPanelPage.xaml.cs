@@ -18,6 +18,17 @@ namespace MagicMirror.Views
             //webView.Navigated += WebView_Navigated;
         }
 
+        private void webView_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            busyIndicator.IsRunning = true;
+        }
+
+        private void webView_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            busyIndicator.IsRunning = false;
+            busyIndicator.IsVisible = false;
+        }
+
         /*private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
             if (e.Result != WebNavigationResult.Success)
